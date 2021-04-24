@@ -47,7 +47,7 @@ async def help(client, message: Message):
 async def urlupload(c: Client, message: Message):
     if Config.UPDATES_CHANNEL is not None:
         try:
-            user = await c.get_chat_member(UPDATES_CHANNEL, message.chat.id)
+            user = await c.get_chat_member(Config.UPDATES_CHANNEL, message.chat.id)
             if user.status == "kicked":
                 await c.send_message(
                     chat_id=message.chat.id,
