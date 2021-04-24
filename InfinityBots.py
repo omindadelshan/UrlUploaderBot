@@ -47,10 +47,10 @@ async def help(client, message: Message):
 async def urlupload(c: Client, message: Message):
     if Config.UPDATES_CHANNEL is not None:
         try:
-            user = await c.get_chat_member(UPDATES_CHANNEL, m.chat.id)
+            user = await c.get_chat_member(UPDATES_CHANNEL, message.chat.id)
             if user.status == "kicked":
                 await c.send_message(
-                    chat_id=m.chat.id,
+                    chat_id=message.chat.id,
                     text="Sorry, You are Banned to use me. Contact my [Support Group](https://t.me/InfinityBots_Support).",
                     parse_mode="markdown",
                     disable_web_page_preview=True
@@ -58,7 +58,7 @@ async def urlupload(c: Client, message: Message):
                 return
         except UserNotParticipant:
             await c.send_message(
-                chat_id=m.chat.id,
+                chat_id=message.chat.id,
                 text="**Please Join My Updates Channel to use me 😉**",
                 reply_markup=InlineKeyboardMarkup(
                     [
@@ -72,7 +72,7 @@ async def urlupload(c: Client, message: Message):
             return
         except Exception:
             await c.send_message(
-                chat_id=m.chat.id,
+                chat_id=message.chat.id,
                 text="Something went Wrong. Contact my [Support Group](https://t.me/InfinityBots_Support).",
                 parse_mode="markdown",
                 disable_web_page_preview=True)
