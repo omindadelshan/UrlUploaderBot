@@ -44,11 +44,43 @@ async def help(client, message: Message):
 
 # url upload
 @JEBotZ.on_message(filters.regex(pattern=".*http.*") & ~filters.edited)
-async def urlupload(client, message: Message):
+async def urlupload(c: Client, message: Message):
+    if Config.UPDATES_CHANNEL is not None:
+        try:
+            user = await c.get_chat_member(UPDATES_CHANNEL, m.chat.id)
+            if user.status == "kicked":
+                await c.send_message(
+                    chat_id=m.chat.id,
+                    text="Sorry, You are Banned to use me. Contact my [Support Group](https://t.me/InfinityBots_Support).",
+                    parse_mode="markdown",
+                    disable_web_page_preview=True
+                )
+                return
+        except UserNotParticipant:
+            await c.send_message(
+                chat_id=m.chat.id,
+                text="**Please Join My Updates Channel to use me 😉**",
+                reply_markup=InlineKeyboardMarkup(
+                    [
+                        [
+                            InlineKeyboardButton("Join Updates Channel", url=f"https://t.me/{Var.UPDATES_CHANNEL}")
+                        ]
+                    ]
+                ),
+                parse_mode="markdown"
+            )
+            return
+        except Exception:
+            await c.send_message(
+                chat_id=m.chat.id,
+                text="Something went Wrong. Contact my [Support Group](https://t.me/InfinityBots_Support).",
+                parse_mode="markdown",
+                disable_web_page_preview=True)
+            return
     msg = await message.reply_text(text="Checking Url 🧐", quote=True)
     url = message.text
     cap = "@JEBotZ"
-    thurl = "https://telegra.ph/file/a23b8f38fde1914a4bbe9.jpg"                  
+    thurl = "https://telegra.ph/file/a23b8f38fde1914a4bbe9.jpg"               
     try: # url download via wget to server
          await msg.edit("Trying to download 😉")
          lel = wget.download(url)
