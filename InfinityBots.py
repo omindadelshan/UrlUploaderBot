@@ -77,11 +77,13 @@ async def urlupload(c: Client, message: Message):
                 parse_mode="markdown",
                 disable_web_page_preview=True)
             return
-    msg = await message.reply_text(text="Checking Url 🧐", quote=True)
-    url = message.text
-    cap = "@JEBotZ"
-    thurl = "https://telegra.ph/file/a23b8f38fde1914a4bbe9.jpg"               
+ 
+ 
     try: # url download via wget to server
+         msg = await message.reply_text(text="Checking Url 🧐", quote=True)
+         url = message.text
+         cap = "@JEBotZ"
+         thurl = "https://telegra.ph/file/a23b8f38fde1914a4bbe9.jpg"               
          await msg.edit("Trying to download 😉")
          lel = wget.download(url)
          thumb = wget.download(thurl)
