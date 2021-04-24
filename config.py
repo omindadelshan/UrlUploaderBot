@@ -8,4 +8,4 @@ class Config(object):
 
     API_HASH = os.environ.get("API_HASH", "")
 
-    UPDATES_CHANNEL = os.environ.get("UPDATES_CHANNEL", "")
+    UPDATES_CHANNEL = os.environ.get("UPDATES_CHANNEL", None)
